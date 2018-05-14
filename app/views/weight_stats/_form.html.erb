@@ -1,0 +1,32 @@
+<%= form_with(model: weight_stat, local: true) do |form| %>
+  <% if weight_stat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(weight_stat.errors.count, "error") %> prohibited this weight_stat from being saved:</h2>
+
+      <ul>
+      <% weight_stat.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :weight %>
+    <%= form.number_field :weight, id: :weight_stat_weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :noOfDogFans %>
+    <%= form.number_field :noOfDogFans, id: :weight_stat_noOfDogFans %>
+  </div>
+
+  <div class="field">
+    <%= form.label :noOfCatFans %>
+    <%= form.number_field :noOfCatFans, id: :weight_stat_noOfCatFans %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

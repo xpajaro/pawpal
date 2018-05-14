@@ -1,2 +1,21 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+
+<%= render 'layouts/header' %>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" 
+    role="tab" aria-controls="nav-home" aria-selected="true">Quiz</a>
+    
+    <a class="nav-item nav-link" id="nav-results-tab" data-toggle="tab" href="#nav-results" 
+    role="tab" aria-controls="nav-results" aria-selected="false">Results</a>
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <%= render 'layouts/home/jumbotron' %>
+
+    <%= render 'layouts/home/quiz' %>
+  </div>
+  <div class="tab-pane fade" id="nav-results" role="tabpanel" aria-labelledby="nav-results-tab">...</div>
+</div>

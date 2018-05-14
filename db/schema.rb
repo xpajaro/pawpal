@@ -10,15 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180514013750) do
-
-  create_table "height_stats", force: :cascade do |t|
-    t.integer "height"
-    t.integer "noOfDogFans"
-    t.integer "noOfCatFans"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20180514013607) do
 
   create_table "weight_stats", force: :cascade do |t|
     t.integer "weight"

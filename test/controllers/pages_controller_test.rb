@@ -11,9 +11,5 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get stats" do
-    get pages_stats_url
-    assert_response :success
-  end
 
 end

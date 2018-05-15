@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   get 'pages/report'
 
-  get 'pages/stats'
-
+  namespace :api do
+    namespace :v1 do
+      get 'stats/weight'
+      get 'stats/table'
+    end
+  end
 end

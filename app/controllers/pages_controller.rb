@@ -5,6 +5,4 @@ class PagesController < ApplicationController
   def report
   end
 
-  def stats
-  end
 end

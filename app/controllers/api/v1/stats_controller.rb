@@ -9,16 +9,18 @@ class API::V1::StatsController < ApplicationController
   end
 
   def table
-    w = params[:weight]
-    h = params[:height]
+    weight = params[:weight]
+    height = params[:height]
     
     response = StatsTable.new
 
-    if w and h
-      response = calculate(w, h)
+    if weight and height
+      response = calculate(weight, height)
+      render json: ResponseWrapper.new(response)
+    else
+      render json: ResponseWrapper.new(response, ResponseWrapper::RESPONSE_FAIL, "parameters incomplete")
     end
 
-    render json: ResponseWrapper.new(response)
   end
 
   def calculate(weight, height)

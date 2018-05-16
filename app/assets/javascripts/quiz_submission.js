@@ -39,6 +39,10 @@ $(document).ready(function(){
       $("#imgPet").attr("src",`/assets/${pet}.jpeg`);
 
       shareConfidence(stats);
+
+      // confirmation buttons could be faded out from previous confirmation
+      $("#btnCorrect").fadeIn();
+      $("#btnIncorrect").fadeIn();
     } else{
       showQuizError();
     }

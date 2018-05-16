@@ -28,18 +28,26 @@ class StatsTable
   # where importance is how much we want a measurement to influence the result.
   
   def calculate(wRecord, hRecord, similarWRecords, similarHRecords)
-    @userMetricsConfidence = getUserMetricConfidence(wRecord, hRecord)
-    @similarMetricsConfidence = getSimilarMetricConfidence(similarWRecords, similarHRecords)
-
-    @catFanConfidence = (@userMetricsConfidence.catFanConfidence * IMPORTANCE_OF_USER_METRICS) +
-    (@similarMetricsConfidence.catFanConfidence * IMPORTANCE_OF_SIMILAR_METRICS)
     
-    @dogFanConfidence = (@userMetricsConfidence.dogFanConfidence * IMPORTANCE_OF_USER_METRICS) +
-    (@similarMetricsConfidence.dogFanConfidence * IMPORTANCE_OF_SIMILAR_METRICS)
+    userMetricsConfidence = getUserMetricConfidence(wRecord, hRecord)
+    similarMetricsConfidence = getSimilarMetricConfidence(similarWRecords, similarHRecords)
 
-    @preferedPet = choosePet(@catFanConfidence, @dogFanConfidence)
+    catFanConfidence = (userMetricsConfidence.catFanConfidence * IMPORTANCE_OF_USER_METRICS) +
+    (similarMetricsConfidence.catFanConfidence * IMPORTANCE_OF_SIMILAR_METRICS)
+    
+    dogFanConfidence = (userMetricsConfidence.dogFanConfidence * IMPORTANCE_OF_USER_METRICS) +
+    (similarMetricsConfidence.dogFanConfidence * IMPORTANCE_OF_SIMILAR_METRICS)
 
-    self
+    preferedPet = choosePet(catFanConfidence, dogFanConfidence)
+
+    tempTable = StatsTable.new
+    tempTable.userMetricsConfidence = userMetricsConfidence
+    tempTable.similarMetricsConfidence = similarMetricsConfidence
+    tempTable.catFanConfidence = catFanConfidence
+    tempTable.dogFanConfidence = dogFanConfidence
+    tempTable.preferedPet = preferedPet
+
+    tempTable
 
   end
 
@@ -61,19 +69,33 @@ class StatsTable
     weightConfidence = calculateFanConfidence(wRecord)
     heightConfidence = calculateFanConfidence(hRecord)
 
-    FanConfidence.new(
-    weightConfidence.catFanConfidence + heightConfidence.catFanConfidence,
-    weightConfidence.dogFanConfidence + heightConfidence.dogFanConfidence)
+    totalConfidence = weightConfidence.catFanConfidence + heightConfidence.catFanConfidence +
+    weightConfidence.dogFanConfidence + heightConfidence.dogFanConfidence
 
+    if (totalConfidence != 0)
+      FanConfidence.new(
+      (weightConfidence.catFanConfidence + heightConfidence.catFanConfidence)/totalConfidence,
+      (weightConfidence.dogFanConfidence + heightConfidence.dogFanConfidence)/totalConfidence)
+    else
+      FanConfidence.new(0.0, 0.0)
+    end
   end
 
   def getSimilarMetricConfidence(similarWRecords, similarHRecords)
     similarWeightConfidence = aggregateFanConfidence(similarWRecords)
     similarHeightConfidence = aggregateFanConfidence(similarHRecords)
 
-    FanConfidence.new(
-    similarWeightConfidence.catFanConfidence + similarHeightConfidence.catFanConfidence,
-    similarWeightConfidence.dogFanConfidence + similarHeightConfidence.dogFanConfidence)
+    totalConfidence = similarWeightConfidence.catFanConfidence + similarHeightConfidence.catFanConfidence +
+      similarWeightConfidence.dogFanConfidence + similarHeightConfidence.dogFanConfidence
+
+    if (totalConfidence != 0)
+      FanConfidence.new(
+      (similarWeightConfidence.catFanConfidence + similarHeightConfidence.catFanConfidence)/totalConfidence,
+      (similarWeightConfidence.dogFanConfidence + similarHeightConfidence.dogFanConfidence)/totalConfidence)
+    else
+      FanConfidence.new(0.0, 0.0)
+    end
+
   end
 
   # calculate confidence over a range of records

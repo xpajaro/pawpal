@@ -9,42 +9,55 @@ class API::V1::StatsController < ApplicationController
   end
 
   def table
-    weight = params[:weight]
-    height = params[:height]
-    
-    response = StatsTable.new
 
-    if weight and height
-      response = calculate(weight, height)
-      render json: ResponseWrapper.new(response)
-    else
-      render json: ResponseWrapper.new(response, ResponseWrapper::RESPONSE_FAIL, "parameters incomplete")
+    jsonResponse = ResponseWrapper.new(nil, ResponseWrapper::RESPONSE_FAIL)
+
+    begin
+      weight = params[:weight].to_i
+      height = params[:height].to_i
+
+      jsonResponse.status = ResponseWrapper::RESPONSE_PASS
+      jsonResponse.data = calculate(weight, height)
+    rescue Exception => ex
+      puts ex
+      jsonResponse.status = ResponseWrapper::RESPONSE_FAIL
+      jsonResponse.message = "invalid parameters" #most common issue for now
+    ensure
+      render json: jsonResponse
     end
 
   end
 
   def calculate(weight, height)
-    
-    #find records for this weight and height 
-    weightRecord = WeightRecord.find_by(value:weight)
-    heightRecord = HeightRecord.find_by(value:height)
+    petStatsTable  = StatsTable.new
 
-    #load records for similar weight and height
-    #use sample space constant for range
+    #find records for this weight and height 
+    weightRecord = WeightRecord.find_by(value: weight)
+    heightRecord = HeightRecord.find_by(value: height)
+
+    similarWeightRecords, similarHeightRecords = getSimilarRecords(weight, height)
+
+    petStatsTable.calculate(weightRecord, heightRecord, similarWeightRecords, similarHeightRecords)
+
+  end
+
+
+  #load records for similar weight and height
+  #use sample space constant for range
+  def getSimilarRecords(weight, height)
     similarWeightRecords = []
     similarHeightRecords = []
 
     (-SAMPLE_SPACE..SAMPLE_SPACE).each do |i|
       if i != 0
-        puts i, weight
-        similarWeightRecords.push(WeightRecord.find_by(value:params[weight + i]))
-        similarHeightRecords.push(HeightRecord.find_by(value:params[height + i]))
+        similarWeightRecords.push(WeightRecord.find_by(value: weight + i))
+        similarHeightRecords.push(HeightRecord.find_by(value: height + i))
       end
     end
 
-    StatsTable.calculate(weightRecord, heightRecord, similarWeightRecords, similarHeightRecords)
-
+    return similarWeightRecords, similarHeightRecords
   end
+
 
 
 end

@@ -1,67 +1,64 @@
-<div class="row">
-  <div class="col">
-    <p> Enter the answers to see your BFF:</p>
 
-    <form  class="needs-validation" novalidate> 
-      <!-- uses bootstrap custom validation in assets -->
-        
-        <div class="row">
-          <div class="col  col-lg-4">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="">Enter your weight</span>
-              </div>
-              <input type="number" class="form-control" id="txtWeightPounds"  placeholder="pounds" 
-                min="8" max="500" required>
-              <div class="invalid-feedback">
-                Please enter a weight between 8 and 500lbs.
-              </div>
-            </div>
+
+<p class="lead"> Enter the answers to see your BFF:</p>
+
+<form  class="needs-validation" novalidate> 
+  <!-- uses bootstrap custom validation in assets -->
+    
+    <div class="row">
+      <div class="col">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="">Enter your weight</span>
+          </div>
+          <input type="number" class="form-control" id="txtWeight"  placeholder="pounds" 
+            min="8" max="500" required>
+          <div class="invalid-feedback">
+            Please enter a weight between 8 and 500lbs.
           </div>
         </div>
-
-        <div class="row">
-          <div class="col  col-lg-4">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="">Enter your height</span>
-              </div>
-              <select class="custom-select" id="ddlHeightFeet" required>
-                <option value="1">1ft</option>
-                <option value="2">2ft</option>
-                <option value="3">3ft</option>
-                <option value="4">4ft</option>
-                <option value="5" selected>5ft</option>
-                <option value="6">6ft</option>
-                <option value="7">7ft</option>
-              </select>
-
-              <select class="custom-select" id="ddlHeightInches" required>
-                <option value="0" selected>0in</option>
-                <option value="1">1in</option>
-                <option value="2">2in</option>
-                <option value="3">3in</option>
-                <option value="4">4in</option>
-                <option value="5">5in</option>
-                <option value="6">6in</option>
-                <option value="7">7in</option>
-                <option value="8">8in</option>
-                <option value="9">9in</option>
-                <option value="10">10in</option>
-                <option value="11">11in</option>
-              </select>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col  col-lg-4">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </div>
-
       </div>
-    </form>
-  </div>
-</div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="">Enter your height</span>
+          </div>
+          <select class="custom-select" id="ddlHeightFeet" required>
+            <option value="1">1ft</option>
+            <option value="2">2ft</option>
+            <option value="3">3ft</option>
+            <option value="4">4ft</option>
+            <option value="5" selected>5ft</option>
+            <option value="6">6ft</option>
+            <option value="7">7ft</option>
+          </select>
+
+          <select class="custom-select" id="ddlHeightInches" required>
+            <option value="0" selected>0in</option>
+            <option value="1">1in</option>
+            <option value="2">2in</option>
+            <option value="3">3in</option>
+            <option value="4">4in</option>
+            <option value="5">5in</option>
+            <option value="6">6in</option>
+            <option value="7">7in</option>
+            <option value="8">8in</option>
+            <option value="9">9in</option>
+            <option value="10">10in</option>
+            <option value="11">11in</option>
+          </select>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <button id="btnQuiz" type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+
+</form>

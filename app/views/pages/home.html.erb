@@ -14,8 +14,14 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     <%= render 'layouts/home/jumbotron' %>
-
-    <%= render 'layouts/home/quiz' %>
+    <div class="row">
+      <div class="col col-lg-5">
+        <%= render 'layouts/home/quiz' %>
+      </div>
+      <div class="col col-lg-7">
+        <%= render 'layouts/home/stats' %>
+      </div>
+    </div>
   </div>
   <div class="tab-pane fade" id="nav-results" role="tabpanel" aria-labelledby="nav-results-tab">...</div>
 </div>

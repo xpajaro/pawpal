@@ -18,6 +18,7 @@ class StatsTableTest < ActiveSupport::TestCase
     @sampleTable = StatsTable.new
   end
 
+  
   test "can calculate fan confidence" do
     fanConfidence = @sampleTable.calculateFanConfidence(@sampleWRecord)
   
@@ -42,17 +43,17 @@ class StatsTableTest < ActiveSupport::TestCase
   test "can get user metric confidence" do
     fanConfidence = @sampleTable.getUserMetricConfidence(@sampleWRecord, @sampleHRecord)
     
-    assert_equal (20/70.0 + 7/13.0), fanConfidence.catFanConfidence,  "wrong cat confidence value"
-    assert_equal (50/70.0 + 6/13.0), fanConfidence.dogFanConfidence, "wrong dog confidence value"
+    assert_equal (20/70.0 + 7/13.0)/2, fanConfidence.catFanConfidence,  "wrong cat confidence value"
+    assert_equal (50/70.0 + 6/13.0)/2, fanConfidence.dogFanConfidence, "wrong dog confidence value"
   end
 
   test "can get similar metric confidence" do
     fanConfidence = @sampleTable.getSimilarMetricConfidence(@sampleWRecords, @sampleHRecords)
     
-    assert_equal (20/70.0 + 25/80.0 + 30/90.0) + (7/13.0 + 13/16.0 + 12/24.0), 
+    assert_equal ((20/70.0 + 25/80.0 + 30/90.0) + (7/13.0 + 13/16.0 + 12/24.0))/6, 
     fanConfidence.catFanConfidence, "wrong cat confidence value"
     
-    assert_equal (50/70.0 + 55/80.0 + 60/90.0) + (6/13.0 + 3/16.0 + 12/24.0),
+    assert_equal ((50/70.0 + 55/80.0 + 60/90.0) + (6/13.0 + 3/16.0 + 12/24.0))/6,
     fanConfidence.dogFanConfidence, "wrong dog confidence value"
   end
 

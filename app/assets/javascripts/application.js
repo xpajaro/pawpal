@@ -16,3 +16,5 @@
 //= require_tree .
 //= require popper
 //= require bootstrap-sprockets
+//= require Chart.bundle
+//= require chartkick

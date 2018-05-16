@@ -2,6 +2,10 @@ class API::V1::StatsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   SAMPLE_SPACE = 3
+
+  def setup
+    @testt =  'baccc' # {1:2, 2:4, 5:22}
+  end
   
   def weight
     weightRecords = WeightRecord.all

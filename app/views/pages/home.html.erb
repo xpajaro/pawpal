@@ -5,10 +5,10 @@
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" 
-    role="tab" aria-controls="nav-home" aria-selected="true">Quiz</a>
+    role="tab" aria-controls="nav-home" aria-selected="true">Find your pal</a>
     
     <a class="nav-item nav-link" id="nav-results-tab" data-toggle="tab" href="#nav-results" 
-    role="tab" aria-controls="nav-results" aria-selected="false">Friend maps</a>
+    role="tab" aria-controls="nav-results" aria-selected="false">Explore pal findings</a>
   </div>
 </nav>
 
@@ -24,5 +24,7 @@
       </div>
     </div>
   </div>
-  <div class="tab-pane fade" id="nav-results" role="tabpanel" aria-labelledby="nav-results-tab">...</div>
+  <div class="tab-pane fade" id="nav-results" role="tabpanel" aria-labelledby="nav-results-tab">
+    <%= render 'layouts/charts' %>
+  </div>
 </div>

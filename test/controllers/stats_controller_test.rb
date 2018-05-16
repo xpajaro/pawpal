@@ -12,6 +12,12 @@ class StatsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get height" do
+    get api_v1_stats_height_url
+
+    assert_response :success
+  end
+
   test "should get stats table" do
     get "#{api_v1_stats_table_url}?height=54&weight=160"
     

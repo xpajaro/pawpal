@@ -3,14 +3,41 @@ class API::V1::StatsController < ApplicationController
 
   SAMPLE_SPACE = 3
 
-  def setup
-    @testt =  'baccc' # {1:2, 2:4, 5:22}
-  end
   
   def weight
-    weightRecords = WeightRecord.all
-    render json: ResponseWrapper.new(weightRecords)
+    jsonResponse = ResponseWrapper.new(nil, ResponseWrapper::RESPONSE_FAIL)
+
+    begin
+      weightRecords = WeightRecord.all
+
+      jsonResponse.status = ResponseWrapper::RESPONSE_PASS
+      jsonResponse.message = "all weight records retrieved."
+      jsonResponse.data = weightRecords
+    rescue Exception => ex
+      puts ex
+      jsonResponse.message = "weight records could not be retrieved"
+    ensure
+      render json: jsonResponse
+    end
   end
+
+  def height
+    jsonResponse = ResponseWrapper.new(nil, ResponseWrapper::RESPONSE_FAIL)
+
+    begin
+      heightRecords = HeightRecord.all
+
+      jsonResponse.status = ResponseWrapper::RESPONSE_PASS
+      jsonResponse.message = "all height records retrieved."
+      jsonResponse.data = heightRecords
+    rescue Exception => ex
+      puts ex
+      jsonResponse.message = "height records could not be retrieved"
+    ensure
+      render json: jsonResponse
+    end
+  end
+
 
   def table
 

@@ -1,24 +1,35 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+PawPal is a rails application to recommend a pet to the user (cat or dog) based on their weight and height.
 
-Things you may want to cover:
+The recommendation algorithm works by:
+comparing the no of cat fans and dog fans at the user's height and weight
+to:
+the no of cat and dog fans at similar user stats
 
-* Ruby version
+a weighted average of the results is taken with a bias for results from the user's metrics.
 
-* System dependencies
+the algorithm improves by taking feedback from the user and adding it to exiting records.
 
-* Configuration
+----------------
 
-* Database creation
+Pawpal is a full stack application:
+- it using jquery and bootstrap frameworks for the heavy lifting in the frontend.
+- it uses a REST api powered by rails in the backend.
 
-* Database initialization
+Basic line charts are also provided using chart.js
 
-* How to run the test suite
+----------------
 
-* Services (job queues, cache servers, search engines, etc.)
+INSTALLATION
 
-* Deployment instructions
+- the dev environment uses ruby 2.3.1 and rails 5.1.4
 
-* ...
+- cd to the app folder 
+
+  - enter 'bundle install' to install dependencies
+  - populate the db using 'rake:populate' (this will empty the current data and seed the db with random values)
+  - run the application by entering 'rails server'
+    - navigate to localhost:3000 to test the app.
+  
+  - you can run tests by entering 'guard' followed by hitting return after when presented with a prompt.

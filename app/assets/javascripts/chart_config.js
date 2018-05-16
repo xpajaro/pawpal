@@ -1,25 +1,24 @@
 $(document).ready(function(){
 
-  loadChart('weightChart');
-
-  function loadChart(chartName, labels, data, color){
+  $.loadChart = function(chartName, labels, catFans, dogFans){
     var ctx = $(`#${chartName}`);
+
 
     var myChart = new Chart(ctx, {
       type: 'line',
       data: {
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          labels: labels,
           datasets: [{
                 label: '# of cat lovers',
                 borderColor: '#ff6384',
                 backgroundColor: 'rgba(0,0,0,0)',
-                data: [12, 19, 3, 50, 2, 3],
+                data: catFans,
                 borderWidth: 1
             },{
               label: '# of dog lovers',
               borderColor: '#0000ff',
               backgroundColor: 'rgba(0,0,0,0)',
-              data: [2, 19, 23, 8, 12, 63],
+              data: dogFans,
               borderWidth: 1
           }
         ]
@@ -29,16 +28,22 @@ $(document).ready(function(){
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero:true
+                  beginAtZero:true,
+                  stepSize: 20
                 }
             }],
             xAxes : [{
                 gridLines : {
-                    display : false
+                  display : false
+                },
+                ticks: {
+                  stepSize: 20,
+                  maxTicksLimit:20
                 }
             }]
         }
       }
     });
   }
+
 });

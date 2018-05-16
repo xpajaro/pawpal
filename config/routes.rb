@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'stats/weight'
       get 'stats/table'
+      post 'stats/confirm'
     end
   end
 end

@@ -17,10 +17,10 @@ class API::V1::StatsController < ApplicationController
       height = params[:height].to_i
 
       jsonResponse.status = ResponseWrapper::RESPONSE_PASS
+      jsonResponse.message = "pet preference stats calculated"
       jsonResponse.data = calculate(weight, height)
     rescue Exception => ex
       puts ex
-      jsonResponse.status = ResponseWrapper::RESPONSE_FAIL
       jsonResponse.message = "invalid parameters" #most common issue for now
     ensure
       render json: jsonResponse
@@ -39,6 +39,45 @@ class API::V1::StatsController < ApplicationController
 
     petStatsTable.calculate(weightRecord, heightRecord, similarWeightRecords, similarHeightRecords)
 
+
+  end
+
+  def confirm
+
+    jsonResponse = ResponseWrapper.new(nil, ResponseWrapper::RESPONSE_FAIL)
+
+    begin
+      weight = params[:weight].to_i
+      height = params[:height].to_i
+
+      pet = params[:pet]
+
+      weightRecord = WeightRecord.find_by(value: weight) || WeightRecord.new(value: weight, noOfCatFans:0, noOfDogFans:0)
+      heightRecord = HeightRecord.find_by(value: height) || HeightRecord.new(value: height, noOfCatFans:0, noOfDogFans:0)
+
+      updateRecord(weightRecord, pet)
+      updateRecord(heightRecord, pet)
+
+      jsonResponse.status = ResponseWrapper::RESPONSE_PASS
+      jsonResponse.message = "user preference updated"
+
+    rescue Exception => ex
+      puts ex
+      jsonResponse.message = "could not record use preference" #most common issue for now
+    ensure
+      render json: jsonResponse
+    end
+
+  end
+
+  def updateRecord(record, pet)
+    if (pet == Constants::PET_CAT)
+      record.noOfCatFans += 1
+    else
+      record.noOfDogFans += 1
+    end
+
+    record.save
   end
 
 

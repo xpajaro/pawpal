@@ -2,10 +2,15 @@ $(document).ready(function(){
 
   $("#btnQuiz").click(function() {
     var weight = $('#txtWeight').val();
+    localStorage.setItem('weight', weight);
+
     var height = ($('#ddlHeightFeet').val() * 12) + (+$('#ddlHeightInches').val());
+    localStorage.setItem('height', height);
+
     var action_url =  `/api/v1/stats/table?weight=${weight}&height=${height}`;
 
     $("#dvAnswerStats").fadeOut();
+    $('#quizAlert').hide('fade');
 
     $.ajax(action_url)
       .done(result =>{
@@ -29,6 +34,7 @@ $(document).ready(function(){
   function setupQuizReport(stats){
     var pet = stats.preferedPet;
     if (pet){
+      localStorage.setItem('pet', pet);
       $("#dvAnswerStats").fadeIn();
 
       $(".lblPet").text(pet);

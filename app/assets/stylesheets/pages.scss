@@ -2,17 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$default_space: 8px;
+
 .header{
-  padding: 8px;
+  padding: $default_space;
 }
 
 form{
   .row{
-    margin-bottom: 8px;
+    margin-bottom: $default_space;
   }
 
   .row:nth-last-child(2) {
-    margin-bottom: 16px;
+    margin-bottom: $default_space * 2;
   }
 }
 
@@ -21,9 +23,13 @@ form{
 }
 
 #dvGraphs{
-  padding: 16px 0;
+  padding: #{$default_space * 2} 0;
 
   .row{
-    margin-bottom: 16px;
+    margin-bottom: $default_space * 2;
   }
+}
+
+.tab-content{
+  margin-bottom: $default_space * 4;
 }

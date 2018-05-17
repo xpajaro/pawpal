@@ -6,10 +6,4 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get report" do
-    get pages_report_url
-    assert_response :success
-  end
-
-
 end

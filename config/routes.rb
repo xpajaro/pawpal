@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   
   get 'pages/home'
 
-  get 'pages/report'
-
   namespace :api do
     namespace :v1 do
       get 'stats/weight'
